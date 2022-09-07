@@ -1,16 +1,18 @@
 <template>
-<div style="position: absolute; right: 0px; top: 20px; padding: 20px;">
+<div style="position: absolute; right: 0px; top: 20px; padding: 20px; color: white;">
   <div v-if="game.youLose" style="color: red;"> Game Over</div>
   <div v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
 
-  
+  <div>SecondsPassed:{{statics.seconds}}</div>
 </div>
-<div style="display: flex; justify-content: center;">
-  <div class="grid-container" :style="{'grid-template-columns': getColumnsForGrid() }">
-    <Cell class="grid-item" v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)"></Cell>
+<div style="min-height: calc( 100vh - 100px );">
+  <div style="display: flex; justify-content: center;">
+    <div class="grid-container" :style="{'grid-template-columns': getColumnsForGrid() }">
+      <Cell class="grid-item" v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)"></Cell>
+    </div>
   </div>
 </div>
-<form style="width: 100vw; background: black; display: flex;justify-content: space-around; position: fixed; bottom: 0px; padding: 20px; color: white; ">
+<form style="width: 100vw; height: 100px; background: black; display: flex;justify-content: space-around; padding: 20px; color: white; ">
   <div>
     <label for="x">X</label>
     <input type="number" name="x" min="5" max="16" v-model="newX">
@@ -45,7 +47,11 @@ export default defineComponent({
       CellMask: CellMask,
       newX:8, 
       newY:8,
-      newMines:16
+      newMines:16,
+      statics:{
+        seconds:0,
+        started:false,
+      }
     }
   },
   methods:{
@@ -63,6 +69,12 @@ export default defineComponent({
         return
       }
 
+      if(!this.statics.started){
+        this.statics.started = true;
+        setTimeout(this.timeFunction,1000);
+      }
+
+
       this.game.touchCell(index);
       if (this.game.youLose)
         this.game.setMinesVisibility();
@@ -71,7 +83,14 @@ export default defineComponent({
 
       }
     },
+    timeFunction(){
+      if(!this.statics.started || this.game.isGameOver)
+        return; 
+      this.statics.seconds++;
+      setTimeout(this.timeFunction,1000);
+    },
     createGame(){
+      this.statics = {seconds:0, started:false};
       this.game = new Game(this.newX,this.newY,this.newMines);
     }
   },

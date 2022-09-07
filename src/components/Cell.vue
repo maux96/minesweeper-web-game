@@ -1,7 +1,9 @@
 <template>
   <div >
     <div class="cell" v-if="mask == CellMask.Visible" :style="{'background-color': color()}" >
-      {{ value }}
+      <span v-if="value==-1">X</span>
+      <span v-else>{{ value }}</span>
+
     </div>
     <div class="cell hovereable" v-else-if="mask== CellMask.Hidden">
      
