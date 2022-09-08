@@ -1,6 +1,6 @@
 <template>
 <div style="position: absolute; right: 0px; top: 20px; padding: 20px; color: white;">
-  <div v-if="game.youLose" style="color: red;"> Game Over</div>
+  <div v-if="game.youLose" style="color: red;"> GameOver!</div>
   <div v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
 
   <div>SecondsPassed:{{statics.seconds}}</div>

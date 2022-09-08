@@ -1,7 +1,7 @@
 <template>
   <div >
     <div class="cell" v-if="mask == CellMask.Visible" :style="{'background-color': color()}" >
-      <span v-if="value==-1">X</span>
+      <span v-if="value==-1"> </span>
       <span v-else>{{ value }}</span>
 
     </div>
@@ -43,13 +43,12 @@ export default defineComponent({
 <style scoped>
  .cell{
   color: whitesmoke;
-  background-color: rgb(155, 155, 255, 0.5);
+  background-color: rgb(155, 155, 255, 0.3);
   padding: 5px;
   user-select: none;
   border-radius: 5px;
   min-width: 20px;
   min-height: 20px;
-  /* backdrop-filter: blur(20px); */
   }
  .hovereable:hover{
   transform: scale(1.2);

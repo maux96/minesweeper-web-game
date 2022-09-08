@@ -21,13 +21,12 @@ class Game {
 		this._sizeY = sizeY;
 
 		this._board =  Array<number>(sizeX*sizeY).fill(0);
-	this._mask =  Array<number>(sizeX*sizeY).fill(0);
+		this._mask =  Array<number>(sizeX*sizeY).fill(0);
 
 		this._totalMines = totalMines;
 
 		this._youLose = false;
 		this._visibleCells = 0;
-		this.buildBoard();
 	}
 
 	get isGameWin(){
@@ -86,6 +85,10 @@ class Game {
 
 
 	touchCell(index :number) :void {	
+		if (this._visibleCells == 0 ){
+			this.buildBoard(index);
+		}
+
 		switch ( this._mask[index] ) {
 			case CellMask.Visible: 
 				// nothing...
@@ -126,11 +129,12 @@ class Game {
 	private static _dirY :number[] = [0,1,1,1,0,-1,-1,-1];
 
 
-	private buildBoard() :void {
+	private buildBoard(index :number) :void {
 		for( let i= 0; i < this.totalMines ;i++){
 			let rx = Math.floor(Math.random() * this.sizeX);
 			let ry = Math.floor(Math.random() * this.sizeY);
-			if ( this.getCell(rx,ry) == -1){
+			// si es una mina ya existente o es el primer click del jugador 
+			if ( this.getCell(rx,ry) == -1 || index == ry*this._sizeX + rx){
 				i--;
 				continue;
 			}
