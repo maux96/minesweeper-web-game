@@ -15,6 +15,7 @@ class Game {
 	private _sizeY :number;
 	private _youLose :boolean;
 	private _visibleCells :number;
+	private _isBoardBuilded :boolean;
 
 	constructor(sizeX :number, sizeY :number, totalMines :number){
 		this._sizeX = sizeX;
@@ -27,6 +28,7 @@ class Game {
 
 		this._youLose = false;
 		this._visibleCells = 0;
+		this._isBoardBuilded= false;
 	}
 
 	get isGameWin(){
@@ -85,9 +87,7 @@ class Game {
 
 
 	touchCell(index :number, isFlagAction=false) :void {	
-		if (this._visibleCells == 0 ){
-			this.buildBoard(index);
-		}
+		
 
 		switch ( this._mask[index] ) {
 			case CellMask.Visible: 
@@ -97,6 +97,12 @@ class Game {
 				if(isFlagAction){
 					this._mask[index] = CellMask.Flag;
 					return;
+				}
+
+				// crear el juego si no esta creado :D
+				if (!this._isBoardBuilded){
+					this.buildBoard(index);
+					this._isBoardBuilded = true;
 				}
 
 				// release visibility
