@@ -1,14 +1,15 @@
 <template>
   <div >
     <div class="cell" v-if="mask == CellMask.Visible" :style="{'background-color': color()}" >
-      <span v-if="value==-1"> </span>
+      <span v-if="value==-1"> &ThickSpace; </span>
+       
       <span v-else>{{ value }}</span>
 
     </div>
     <div class="cell hovereable" v-else-if="mask== CellMask.Hidden">
-     
+      &ThickSpace; 
     </div>
-    <div class="cell hovereable" v-else-if="mask== CellMask.Flag">
+    <div class="cell hovereable" v-else-if="mask== CellMask.Flag" style="background-color: red;">
       F 
     </div>
   </div>
@@ -47,8 +48,8 @@ export default defineComponent({
   padding: 5px;
   user-select: none;
   border-radius: 5px;
-  min-width: 20px;
-  min-height: 20px;
+  width: 100%;
+  height: 100%;
   }
  .hovereable:hover{
   transform: scale(1.2);

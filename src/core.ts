@@ -84,7 +84,7 @@ class Game {
 	}
 
 
-	touchCell(index :number) :void {	
+	touchCell(index :number, isFlagAction=false) :void {	
 		if (this._visibleCells == 0 ){
 			this.buildBoard(index);
 		}
@@ -94,6 +94,11 @@ class Game {
 				// nothing...
 			break;
 			case CellMask.Hidden:
+				if(isFlagAction){
+					this._mask[index] = CellMask.Flag;
+					return;
+				}
+
 				// release visibility
 				let [x , y] = this.getPointFromIndex(index)
 
@@ -106,7 +111,7 @@ class Game {
 				this.releaseVisibility(x,y);
 			break;
 			case CellMask.Flag:
-				// set Hidden
+				this._mask[index] = CellMask.Hidden;
 			break;
 		}
 	}		
