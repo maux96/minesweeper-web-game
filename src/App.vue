@@ -39,7 +39,7 @@
 
 <div style="padding: 100px; padding-bottom: 10px; padding-top: 50px;">
   <div class="grid-container" :style="{'grid-template-columns': getColumnsAndRowsForGrid.columns,'grid-template-rows': getColumnsAndRowsForGrid.rows  }">
-    <Cell v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)" @mousedown.right="setFlag(k)" @contextmenu.prevent></Cell>
+    <Cell v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)"  @contextmenu.prevent="setFlag(k)"></Cell>
   </div>
 </div>
 
