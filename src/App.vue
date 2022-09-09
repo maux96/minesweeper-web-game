@@ -1,54 +1,58 @@
 <template>
-<div  style="position: fixed; right: 0px; top: 0px; padding: 5px; color: white; backdrop-filter: blur(10px); border-radius: 10px;">
-  <button @click="toogleAllPanel = !toogleAllPanel">Show/Hide</button>
-  <div v-if="toogleAllPanel" >
-    <p>Current game:</p>
-    <div v-if="game.youLose" style="color: red;"> GameOver!</div>
-    <div v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
-    <div>SecondsPassed:{{stadistics.seconds}} | Mines: {{game.minesWithNoFlag}}</div>
+<div  style="width: 100%; padding: 5px; color: white; display: flex; flex-direction: row-reverse;">
+  <div style="display: flex; padding: 20px; align-items: center; ">
+    <div class="nav-item" v-if="game.youLose" style="color: red;"> GameOver!</div>
+    <div class="nav-item" v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
+    <div class="nav-item">SecondsPassed:{{stadistics.seconds}} </div> 
+    <div class="nav-item"> Mines: {{game.minesWithNoFlag}}</div>
+    <div class="nav-item" style="z-index: 10;">
+      <button  @click="isPanelActive=!isPanelActive"> NewGame</button>
+
+      <div v-if="isPanelActive" style="position: absolute; right: 10px; backdrop-filter: blur(10px); background-color: rgba(240, 248, 255, 0.3); padding:20px; border-radius: 5px;">
+        <form>
+          <p>Create new game:</p>
+          <div>
+            <label for="x">X</label>
+            <input type="number" name="x" min="5" max="16" v-model="newX">
+          </div>
+          <div>
+            <label for="y">Y</label>
+            <input type="number" name="y" min="5" max="16" v-model="newY">
+          </div>
+          <div>
+            <label for="mines">Mines</label>
+            <input type="number" name="mines" min="5" max="16" v-model="newMines">
+          </div>
+          <div>
+            <input type="button" value="new game!" @click="createGame()">
+          </div>
+        </form>
+      </div>
+    </div> 
     
-
-
-    <hr style="margin-top: 30px;">
-    <button v-if="isPanelActive" @click="isPanelActive=false"> NewGameOptions (-)</button>
-    <button v-else @click="isPanelActive=true">NewGameOptions (+) </button>
-    <div v-if="isPanelActive">
-
-
-      <form>
-        <p>Create new game:</p>
-        <div>
-          <label for="x">X</label>
-          <input type="number" name="x" min="5" max="16" v-model="newX">
-        </div>
-        <div>
-          <label for="y">Y</label>
-          <input type="number" name="y" min="5" max="16" v-model="newY">
-        </div>
-        <div>
-          <label for="mines">Mines</label>
-          <input type="number" name="mines" min="5" max="16" v-model="newMines">
-        </div>
-        <div>
-          <input type="button" value="new game!" @click="createGame()">
-        </div>
-      </form>
-    </div>
   </div>
 </div>
 
-<div style="padding: 100px; padding-bottom: 10px; padding-top: 50px;">
-  <div class="grid-container" :style="{'grid-template-columns': getColumnsAndRowsForGrid.columns,'grid-template-rows': getColumnsAndRowsForGrid.rows  }">
-    <Cell v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)"  @contextmenu.prevent="setFlag(k)"></Cell>
+<div style="display: flex; justify-content: space-between;">
+
+  <div style="width: 1px;  height: 100vh;"></div>
+
+  <div style="padding: 100px; padding-bottom: 10px; padding-top: 50px;">
+    <div class="grid-container" :style="{'grid-template-columns': getColumnsAndRowsForGrid.columns,'grid-template-rows': getColumnsAndRowsForGrid.rows  }">
+      <Cell v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)"  @contextmenu.prevent="setFlag(k)"></Cell>
+    </div>
   </div>
+
+  <div style="width: 1px;  height: 100vh;"></div>
+
 </div>
 
 <div style="padding:50px; padding-top: 5px; color: white;">
-  <p>Left click: reveal terrain.</p>
-  <p>Right click: set flag.</p>
+  <p>LeftClick or touch: reveal terrain.</p>
+  <p>RightClick or holdTouch: set flag.</p>
 </div>
 
-<hr>
+<hr style="width: 100%;">
 <div style="font-size: smaller;">
 <a target="_blank" href="https://icons8.com/icon/117130/naval-mine">Naval Mine</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><br>
     <a target="_blank" href="https://icons8.com/icon/13802/flag-filled">Flag Filled</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
@@ -144,6 +148,10 @@ export default defineComponent({
   justify-content: center;
 
 
+}
+
+.nav-item{
+  margin-left: 10px;
 }
 
 body{
