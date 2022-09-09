@@ -1,5 +1,7 @@
 # minesweeper
 
+A simple minesweeper game made in Vue + TypeScript.
+
 ## Project setup
 ```
 npm install
@@ -15,5 +17,3 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

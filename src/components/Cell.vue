@@ -1,6 +1,9 @@
 <template>
+  <div>
     <div class="cell" v-if="mask == CellMask.Visible" :style="{'background-color': color()}" >
-      <span v-if="value==-1"> &ThickSpace; </span>
+      <span v-if="value==-1"> 
+        <img src="../assets/icons8-naval-mine-30.png" alt="" style="width: 100%; height: 100%;"> 
+      </span>
        
       <span v-else>{{ value }}</span>
 
@@ -8,9 +11,10 @@
     <div class="cell hovereable" v-else-if="mask== CellMask.Hidden">
       &ThickSpace; 
     </div>
-    <div class="cell hovereable" v-else-if="mask== CellMask.Flag" style="background-color: red;">
-      F 
+    <div class="cell hovereable" v-else-if="mask== CellMask.Flag" style="position: relative;">
+      <img src="../assets/icons8-flag-64.png" alt="" style="width: 100%; height: 100%;"> 
     </div>
+  </div>
 </template>
 
 <script lang="ts">

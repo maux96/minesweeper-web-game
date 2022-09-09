@@ -47,6 +47,12 @@
   <p>Left click: reveal terrain.</p>
   <p>Right click: set flag.</p>
 </div>
+
+<hr>
+<div style="font-size: smaller;">
+  <a target="_blank" href="https://icons8.com/icon/105174/flag">Flag</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><br>
+  <a target="_blank" href="https://icons8.com/icon/13802/flag-filled">Flag Filled</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -82,7 +88,6 @@ export default defineComponent({
           alert("You lose :(");
         else if (this.game.isGameWin)
           alert("you win :D")
-        else alert("I realy don't know what's happening here... the thing is... game over!")
         return
       }
 
