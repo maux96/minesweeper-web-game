@@ -4,16 +4,15 @@
       <span v-if="value==-1"> 
         <img src="../assets/icons8-naval-mine-30.png" alt="" style="width: 100%; height: 100%;"> 
       </span>
-       
       <span v-else>{{ value }}</span>
+    </div>
+    <div class="cell hovereable" v-else style="position: relative;">
+      <transition name="fade" mode="out-in">
+        <span v-if="mask== CellMask.Hidden">&ThickSpace;</span>
+        <img v-else-if="mask== CellMask.Flag"  src="../assets/icons8-flag-64.png" alt="" style="width: 100%; height: 100%;"> 
+      </transition>
+    </div>
 
-    </div>
-    <div class="cell hovereable" v-else-if="mask== CellMask.Hidden">
-      &ThickSpace; 
-    </div>
-    <div class="cell hovereable" v-else-if="mask== CellMask.Flag" style="position: relative;">
-      <img src="../assets/icons8-flag-64.png" alt="" style="width: 100%; height: 100%;"> 
-    </div>
   </div>
 </template>
 
@@ -63,5 +62,16 @@ export default defineComponent({
   z-index: 5;
   transition: all 0.1s;
  }
+
+  .fade-enter-from, .fade-leave-to{
+	 	opacity: 0; 
+    transform: translateY(-100px);
+  }
+  .fade-enter-to, .fade-leave-from {
+	  opacity: 1; 
+  }
+  .fade-enter-active,.fade-leave-active{
+    transition: all 0.2s;
+  } 
 
 </style>

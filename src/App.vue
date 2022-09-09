@@ -35,7 +35,7 @@
 
 <div style="display: flex; justify-content: space-between;">
 
-  <div style="width: 1px;  height: 100vh;"></div>
+  <div style="width: 1px; "></div>
 
   <div style="padding: 100px; padding-bottom: 10px; padding-top: 50px;">
     <div class="grid-container" :style="{'grid-template-columns': getColumnsAndRowsForGrid.columns,'grid-template-rows': getColumnsAndRowsForGrid.rows  }">
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div style="width: 1px;  height: 100vh;"></div>
+  <div style="width: 1px; "></div>
 
 </div>
 
