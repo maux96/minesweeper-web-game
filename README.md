@@ -1,6 +1,6 @@
 # minesweeper
 
-A simple minesweeper game made in Vue + TypeScript.
+A simple minesweeper game made with Vue + TypeScript.
 
 ## Project setup
 ```
