@@ -16,6 +16,7 @@ class Game {
 	private _youLose :boolean;
 	private _visibleCells :number;
 	private _isBoardBuilded :boolean;
+	private _minesMarked : number;
 
 	constructor(sizeX :number, sizeY :number, totalMines :number){
 		this._sizeX = sizeX;
@@ -25,6 +26,7 @@ class Game {
 		this._mask =  Array<number>(sizeX*sizeY).fill(0);
 
 		this._totalMines = totalMines;
+		this._minesMarked = 0;
 
 		this._youLose = false;
 		this._visibleCells = 0;
@@ -49,6 +51,9 @@ class Game {
 	get totalMines(){
 		return this._totalMines;
 	}
+	get minesWithNoFlag(){
+		return this._totalMines - this._minesMarked;
+	}
 
 	AllBoard() :[value :number,maskValue: number][] {
 		return this._board.map((x,i)=>[x,this._mask[i]]); //copia :D porq no se hacer generadores XD
@@ -58,10 +63,10 @@ class Game {
 	getCell(x :number, y:number) :number{
 		return this._board[y * this.sizeX + x];
 	}
-	setCell(x :number, y :number, value :number){
+	private setCell(x :number, y :number, value :number){
 		this._board[y * this.sizeX + x] = value;
 	}
-	incrCell(x :number, y :number){
+	private incrCell(x :number, y :number){
 		this.setCell(x,y, this.getCell(x,y)+1);
 	}
 
@@ -96,6 +101,7 @@ class Game {
 			case CellMask.Hidden:
 				if(isFlagAction){
 					this._mask[index] = CellMask.Flag;
+					this._minesMarked++;
 					return;
 				}
 
@@ -118,6 +124,7 @@ class Game {
 			break;
 			case CellMask.Flag:
 				this._mask[index] = CellMask.Hidden;
+				this._minesMarked--;
 			break;
 		}
 	}		

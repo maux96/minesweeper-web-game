@@ -1,5 +1,4 @@
 <template>
-  <div >
     <div class="cell" v-if="mask == CellMask.Visible" :style="{'background-color': color()}" >
       <span v-if="value==-1"> &ThickSpace; </span>
        
@@ -12,7 +11,6 @@
     <div class="cell hovereable" v-else-if="mask== CellMask.Flag" style="background-color: red;">
       F 
     </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -50,6 +48,9 @@ export default defineComponent({
   border-radius: 5px;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   }
  .hovereable:hover{
   transform: scale(1.2);

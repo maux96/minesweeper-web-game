@@ -5,7 +5,8 @@
     <p>Current game:</p>
     <div v-if="game.youLose" style="color: red;"> GameOver!</div>
     <div v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
-    <div>SecondsPassed:{{stadistics.seconds}}</div>
+    <div>SecondsPassed:{{stadistics.seconds}} | Mines: {{game.minesWithNoFlag}}</div>
+    
 
 
     <hr style="margin-top: 30px;">
@@ -36,10 +37,15 @@
   </div>
 </div>
 
-<div style="padding: 100px;">
+<div style="padding: 100px; padding-bottom: 10px; padding-top: 50px;">
   <div class="grid-container" :style="{'grid-template-columns': getColumnsAndRowsForGrid.columns,'grid-template-rows': getColumnsAndRowsForGrid.rows  }">
-    <Cell class="grid-item" v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)" @mousedown.right="setFlag(k)" @contextmenu.prevent></Cell>
+    <Cell v-for="x,k in game.AllBoard()" :key="k" :value="x[0]" :mask="x[1]" @click="touchCell(k)" @mousedown.right="setFlag(k)" @contextmenu.prevent></Cell>
   </div>
+</div>
+
+<div style="padding:50px; padding-top: 5px; color: white;">
+  <p>Left click: reveal terrain.</p>
+  <p>Right click: set flag.</p>
 </div>
 </template>
 
@@ -128,14 +134,15 @@ export default defineComponent({
 .grid-container {
   display: grid;
   text-align: center;
+
   gap:15px;
   justify-content: center;
-}
-.grid-item{
+
 
 }
 
 body{
+  font-family: Arial, Helvetica, sans-serif;
   background-image: linear-gradient(black, rgb(51, 51, 51));
   min-height: 100vh;
   margin: 0px;
