@@ -1,5 +1,5 @@
 <template>
-<div  style="position: fixed; right: 0px; top: 20px; padding: 20px; color: white; backdrop-filter: blur(10px); border-radius: 10px;">
+<div  style="position: fixed; right: 0px; top: 0px; padding: 5px; color: white; backdrop-filter: blur(10px); border-radius: 10px;">
   <button @click="toogleAllPanel = !toogleAllPanel">Show/Hide</button>
   <div v-if="toogleAllPanel" >
     <p>Current game:</p>
@@ -50,8 +50,8 @@
 
 <hr>
 <div style="font-size: smaller;">
-  <a target="_blank" href="https://icons8.com/icon/105174/flag">Flag</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><br>
-  <a target="_blank" href="https://icons8.com/icon/13802/flag-filled">Flag Filled</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/117130/naval-mine">Naval Mine</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><br>
+    <a target="_blank" href="https://icons8.com/icon/13802/flag-filled">Flag Filled</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
   </div>
 </template>
 
