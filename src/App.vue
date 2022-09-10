@@ -11,21 +11,35 @@
       <div v-if="isPanelActive" style="position: absolute; right: 10px; backdrop-filter: blur(10px); background-color: rgba(240, 248, 255, 0.3); padding:20px; border-radius: 5px;">
         <form>
           <p>Create new game:</p>
-          <div>
-            <label for="x">X</label>
-            <input type="number" name="x" min="5" max="16" v-model="newX">
-          </div>
-          <div>
-            <label for="y">Y</label>
-            <input type="number" name="y" min="5" max="16" v-model="newY">
-          </div>
-          <div>
-            <label for="mines">Mines</label>
-            <input type="number" name="mines" min="5" max="16" v-model="newMines">
-          </div>
-          <div>
-            <input type="button" value="new game!" @click="createGame()">
-          </div>
+          <table>
+            <tr>
+              <td>
+                <label for="x">X</label>
+              </td>
+              <td>
+               <input type="number" name="x" min="5" max="16" v-model="newX">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="y">Y</label>
+              </td>
+              <td>
+                <input type="number" name="y" min="5" max="16" v-model="newY">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="mines">Mines</label>
+              </td>
+              <td>
+                <input type="number" name="mines" min="5" max="16" v-model="newMines">
+              </td>
+            </tr>
+            <tr>
+              <input type="button" value="new game!" @click="createGame()">
+            </tr>
+          </table>
         </form>
       </div>
     </div> 
