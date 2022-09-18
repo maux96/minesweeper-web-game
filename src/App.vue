@@ -1,23 +1,28 @@
 <template>
 <div  style="width: 100%; padding: 5px; color: white; display: flex; flex-direction: row-reverse;">
   <div style="display: flex; padding: 20px; align-items: center; ">
-    <div class="nav-item" v-if="game.youLose" style="color: red;"> GameOver!</div>
-    <div class="nav-item" v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
-    <div class="nav-item">SecondsPassed:{{stadistics.seconds}} </div> 
-    <div class="nav-item"> Mines: {{game.minesWithNoFlag}}</div>
-    <div class="nav-item" style="z-index: 10;">
-      <button  @click="isPanelActive=!isPanelActive"> NewGame</button>
+    <div class="red-shadow" style="display: flex; padding: 10px; align-items: center; " >
+      <div class="nav-item" v-if="game.youLose" style="color: red;"> GameOver!</div>
+      <div class="nav-item" v-else-if="game.isGameWin" style="color: greenyellow;"> YouWin! </div>
+      <div class="nav-item">SecondsPassed:{{stadistics.seconds}} </div>   
+      <div class="nav-item"> Mines: {{game.minesWithNoFlag}}</div>
+    </div>
 
-      <div v-if="isPanelActive" style="position: absolute; right: 10px; backdrop-filter: blur(10px); background-color: rgba(240, 248, 255, 0.3); padding:20px; border-radius: 5px;">
+    <div class="nav-item" style="z-index: 10;">
+
+      <div  @click="isPanelActive=!isPanelActive" class="menu-button red-shadow"> NewGame</div>
+
+      <div v-if="isPanelActive" class="red-shadow" style="position: absolute; right: 10px; padding:20px; ">
         <form>
           <p>Create new game:</p>
           <table>
             <tr>
               <td>
+              
                 <label for="x">X</label>
               </td>
               <td>
-               <input type="number" name="x" min="5" max="16" v-model="newX">
+               <input type="number" name="x" min="5" max="16" v-model="newX" >
               </td>
             </tr>
             <tr>
@@ -37,7 +42,7 @@
               </td>
             </tr>
             <tr>
-              <input type="button" value="new game!" @click="createGame()">
+              <input class="red-shadow" style="padding: 5px;" type="button" value="new game!" @click="createGame()">
             </tr>
           </table>
         </form>
@@ -61,13 +66,12 @@
 
 </div>
 
-<div style="padding:50px; padding-top: 5px; color: white;">
+<div  style="padding:50px; padding-top: 5px; color: white;">
   <p>LeftClick or touch: reveal terrain.</p>
   <p>RightClick or holdTouch: set flag.</p>
 </div>
 
-<hr style="width: 100%;">
-<div style="font-size: smaller;">
+<div style="font-size: smaller; margin-bottom: 50px; width: fit-content; padding: 20px;"  class="red-shadow">
 <a target="_blank" href="https://icons8.com/icon/117130/naval-mine">Naval Mine</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a><br>
     <a target="_blank" href="https://icons8.com/icon/13802/flag-filled">Flag Filled</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
   </div>
@@ -120,7 +124,6 @@ export default defineComponent({
         this.game.setMinesVisibility();
       if(this.game.isGameOver){
         // parar cronometros...
-
       }
     },
     setFlag(index :number){
@@ -131,6 +134,7 @@ export default defineComponent({
         return; 
       this.stadistics.seconds++;
       setTimeout(this.timeFunction,1000);
+  
     },
     createGame(){
       this.isPanelActive = false;
@@ -143,6 +147,7 @@ export default defineComponent({
       let cols=this.game.sizeX;
       let rows=this.game.sizeY;
   
+     
       const size = String((window.visualViewport.width/4)/cols) +"px";
       return {columns:Array(cols).fill(size).join(" "), rows:Array(rows).fill(size).join(" "),gap:size};
     },
@@ -173,6 +178,17 @@ body{
   background-image: linear-gradient(black, rgb(51, 51, 51));
   min-height: 100vh;
   margin: 0px;
+}
+
+.red-shadow{
+  background-color: gray;
+  box-shadow: 5px 5px 0px red;
+  color: white;
+}
+
+.menu-button{
+  padding: 10px;
+  cursor: pointer;
 }
 
 </style>
